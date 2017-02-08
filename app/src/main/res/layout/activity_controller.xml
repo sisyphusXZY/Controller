@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.blackfh.controller.MainActivity">
+
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thrNum"
+        android:layout_below="@+id/yawNum"
+        android:layout_toRightOf="@+id/Yaw"
+        android:layout_toEndOf="@+id/Yaw"
+        android:layout_above="@+id/battary" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yawNum"
+        android:layout_below="@+id/Pitch"
+        android:layout_toRightOf="@+id/Yaw"
+        android:layout_toEndOf="@+id/Yaw"
+        android:layout_above="@+id/Thr" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Pitch"
+        android:layout_toRightOf="@+id/Pitch"
+        android:id="@+id/rollNum"
+        android:layout_alignTop="@+id/Roll" />
+
+    <com.example.blackfh.controller.LeftNavController
+        android:layout_height="150dp"
+        android:layout_width="150dp"
+        custom:InnerColor="#000000"
+        custom:OuterColor="#ffffff"
+        android:id="@+id/navController2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <com.example.blackfh.controller.RightNavController
+        android:layout_height="150dp"
+        android:layout_width="150dp"
+        custom:InnerColor="#000000"
+        custom:OuterColor="#ffffff"
+        android:id="@+id/navController1"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignTop="@+id/navController2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:switchMinWidth="100dp"
+        android:id="@+id/open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/Yaw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Yaw:"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/Thr"
+        android:layout_alignRight="@+id/battary"
+        android:layout_alignEnd="@+id/battary"
+        />
+
+    <TextView
+        android:id="@+id/Pitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Pitch:"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/Yaw"
+        android:layout_alignRight="@+id/battary"
+        android:layout_alignEnd="@+id/battary"
+        />
+
+    <TextView
+        android:id="@+id/Roll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Roll:"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/Pitch"
+        android:layout_alignRight="@+id/battary"
+        android:layout_alignEnd="@+id/battary"
+        />
+
+    <TextView
+        android:id="@+id/battary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Battary:"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/navController2"
+        android:layout_toEndOf="@+id/navController2" />
+
+    <TextView
+        android:id="@+id/Thr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Thr:"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/battary"
+        android:layout_alignRight="@+id/battary"
+        android:layout_alignEnd="@+id/battary" />
+
+
+    <Button
+        android:id="@+id/run_botton"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="run"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pitNum"
+        android:layout_below="@+id/rollNum"
+        android:layout_toRightOf="@+id/Yaw"
+        android:layout_toEndOf="@+id/Yaw"
+        android:layout_above="@+id/yawNum" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/batNum"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/battary"
+        android:layout_toEndOf="@+id/battary"
+        android:layout_below="@+id/thrNum" />
+
+</RelativeLayout>
