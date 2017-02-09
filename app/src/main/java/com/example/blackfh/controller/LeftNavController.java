@@ -34,6 +34,7 @@ public class LeftNavController extends View {
     private float unitValue;
     private TextView thrNum;
     private TextView yawNum;
+    private int i = 0;
 
     public interface OnNavAndSpeedListener {
         public void onNavAndSpeed(float nav, float speed);
@@ -117,8 +118,11 @@ public class LeftNavController extends View {
         innerRedius = outRadius * 0.4f;
 //        innerCenterY = innerCenterY+innerRedius/2;
         canvas.drawCircle(innerCenterX, innerCenterY, innerRedius, innerPaint);
-        innerCenterY = realHeight / 2 + outRadius;
-        invalidate();
+        if (i == 0) {
+            i++;
+            innerCenterY = realHeight / 2 + outRadius;
+            invalidate();
+        }
         //计算单个像素对应的数值pit/rol=0~3000，中值1500
         unitValue = 3000 / outRadius / 2;
     }
@@ -147,11 +151,13 @@ public class LeftNavController extends View {
             }
 //            yawNum.setText(String.valueOf(yaw));
 //            thrNum.setText(String.valueOf(thr));
+            //在此处调用yaw，thr值
             Log.i("TAG", yaw + "MOVED" + thr);
+
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
             innerCenterX = realWidth / 2;
-            innerCenterY = realHeight / 2 + outRadius / 2;
+//            innerCenterY = realHeight / 2 + outRadius / 2;
             invalidate();
 
         }
@@ -182,8 +188,6 @@ public class LeftNavController extends View {
             } else if (X >= realWidth / 2 + outRadius) {
                 innerCenterX = realWidth / 2 + outRadius;
             }
-
-
             invalidate();
         } else {
             Log.i("TAG", "notInCircle");

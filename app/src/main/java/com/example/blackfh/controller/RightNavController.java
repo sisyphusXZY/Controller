@@ -99,7 +99,8 @@ public class RightNavController extends View {
         super.onDraw(canvas);
         outRadius = Math.min(Math.min(realWidth/2-getPaddingLeft(),realWidth/2-getPaddingRight()),Math.min(realHeight/2-getPaddingTop(),realHeight/2-getPaddingBottom()));
         //画外部圆
-        canvas.drawCircle(realWidth/2,realHeight/2,outRadius,outerPaint);
+//        canvas.drawCircle(realWidth/2,realHeight/2,outRadius,outerPaint);
+        canvas.drawRoundRect(realWidth / 2 - outRadius, realHeight / 2 - outRadius, realWidth / 2 + outRadius, realHeight / 2 + outRadius, outRadius / 4, outRadius / 4, outerPaint);
         //内部圆
         innerRedius = outRadius*0.4f;
         canvas.drawCircle(innerCenterX,innerCenterY,innerRedius,innerPaint);
@@ -129,7 +130,9 @@ public class RightNavController extends View {
             }else if (pit >= 3000){
                 pit = 3000;
             }
+            //在此处调用pit，rol值
             Log.i("TAG",pit+"MOVED"+rol);
+
         }
         if(event.getAction()==MotionEvent.ACTION_UP){
             innerCenterX = realWidth/2;
@@ -148,45 +151,27 @@ public class RightNavController extends View {
             mCallBack.onNavAndSpeed(X,Y);
         }
 //        boolean isPointInOutCircle = Math.pow(X-realWidth/2,2) +Math.pow(Y-realHeight/2,2)<=Math.pow(outRadius,2);
-        if(true){
+//        if(true){
             Log.i("TAG","inCircle");
             //两种情况：小圆半径
-            boolean isPointInFree = Math.pow(X-realWidth/2,2) +Math.pow(Y-realHeight/2,2)<=Math.pow(outRadius-innerRedius,2);
-            if(isPointInFree){
+//            boolean isPointInFree = Math.pow(X-realWidth/2,2) +Math.pow(Y-realHeight/2,2)<=Math.pow(outRadius-innerRedius,2);
+//            if(isPointInFree){
                 innerCenterX = X;
                 innerCenterY = Y;
-            }else{
-                //处理限制区域，这部分使用触摸点与中心点与外圆方程交点作为内圆的中心点
-                //使用近似三角形来确定这个点
-                //求出触摸点，触摸点垂足和中心点构成的直角三角形（pointTri）的直角边长
-                float pointTriX = Math.abs(realWidth/2-X);//横边
-                float pointTriY = Math.abs(realHeight/2-Y);//竖边
-                float pointTriZ = (float) Math.sqrt((Math.pow(pointTriX,2)+Math.pow(pointTriY,2)));
-                float TriSin = pointTriY/pointTriZ;
-                float TriCos = pointTriX/pointTriZ;
-                //求出在圆环上的三角形的两个直角边的长度
-                float limitCircleTriY = (outRadius-innerRedius)*TriSin;
-                float limitCircleTriX = (outRadius-innerRedius)*TriCos;
-                //确定内圆中心点的位置，分四种情况
-                if(X>=realWidth/2 && Y>=realHeight/2){
-                    innerCenterX = realWidth/2+limitCircleTriX;
-                    innerCenterY = realHeight/2+limitCircleTriY;
-                }else if(X<realWidth/2 && Y>=realHeight/2){
-                    innerCenterX = realWidth/2-limitCircleTriX;
-                    innerCenterY= realHeight/2+limitCircleTriY;
-                }else if(X>=realWidth/2 && Y<realHeight/2){
-                    innerCenterX = realWidth/2+limitCircleTriX;
-                    innerCenterY= realHeight/2-limitCircleTriY;
-                }else{
-                    innerCenterX = realWidth/2-limitCircleTriX;
-                    innerCenterY= realHeight/2-limitCircleTriY;
+                if (Y >= realHeight / 2 + outRadius) {
+                    innerCenterY = realHeight / 2 + outRadius;
+                } else if (Y < realHeight / 2 - outRadius) {
+                    innerCenterY = realHeight / 2 - outRadius;
                 }
-                Log.i("TAG","inLimit");
-            }
-            invalidate();
-        }else{
-            Log.i("TAG","notInCircle");
-        }
+                if (X <= realWidth / 2 - outRadius) {
+                    innerCenterX = realWidth / 2 - outRadius;
+                } else if (X >= realWidth / 2 + outRadius) {
+                    innerCenterX = realWidth / 2 + outRadius;
+                }
+                invalidate();
+//        }else{
+//            Log.i("TAG","notInCircle");
+//        }
     }
     public void setOnNavAndSpeedListener(OnNavAndSpeedListener listener){
         mCallBack = listener;
